@@ -14,7 +14,7 @@
 ## Υλοποίηση
 
 - Βάση Δεδόμενων: PostgreSQL
-- Backend: API endpoints μέσω NodeJS (με διάφορα frameworks)
+- Backend: API endpoints μέσω Java (με κάποιο framework π.χ. Spring)
 - Frontend: HTML/CSS/JavaScript στο οποίο θα δίνεται η τοποθεσία από τον χρήστη και θα εμφανίζονται παραλίες κοντά του
 
 ## Author
