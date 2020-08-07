@@ -14,6 +14,9 @@ public class BeachController {
         ArrayList<Beach> beaches = new ArrayList<>();
 
         Connection c =  DBDriver.connectToDatabase();
+
+        // Find nearest points
+        // https://ourcodeworld.com/articles/read/1019/how-to-find-nearest-locations-from-a-collection-of-coordinates-latitude-and-longitude-with-php-mysql
         String query = "SELECT * FROM (\n" +
                 "    SELECT *, \n" +
                 "        (\n" +
