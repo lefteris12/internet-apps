@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Greek beaches</title>
+</head>
+
+<button onclick="setCurrentLocation()">Get Current Location</button>
+
+<form>
+    <label for="lon" >Longitude:</label><br>
+    <input type="text" id="lon" name="lon" value="23.78291" required><br>
+    <label for="lat">Latitude:</label><br>
+    <input type="text" id="lat" name="lat" value="37.97849" required><br>
+    <label for="maxDistance">Max Distance(km):</label><br>
+    <input type="number" id="maxDistance" name="maxDistance" value="10" required><br>
+    <label for="checkWeather">Check weather? </label>
+    <input type="checkbox" id="checkWeather" name="checkWeather"><br><br>
+    <input type="submit" value="Submit">
+</form>
+
+<table id="table"></table>
+
+<script src="script.js"></script>
+</body>
+</html>
