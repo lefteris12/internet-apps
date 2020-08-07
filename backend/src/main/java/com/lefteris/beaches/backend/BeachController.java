@@ -34,7 +34,8 @@ public class BeachController {
                 "    as distance FROM beaches\n" +
                 ") beaches\n" +
                 "WHERE distance <= " + maxDistance + " \n" +
-                "ORDER BY distance;";
+                "ORDER BY distance\n" +
+                "LIMIT 10;";
 
         Statement stm = c.createStatement();
         ResultSet rs = stm.executeQuery(query);
