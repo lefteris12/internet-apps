@@ -1,7 +1,16 @@
 var form = document.querySelector('form');
 var openWeatherApiKey = 'a6877af1a1764b3a3ea5f0c542b099f5';
 
+var map = L.map('mapid').setView([0, 0], 20);
+var layer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
 form.addEventListener('submit', event => {
+//  if (map != undefined) { map.remove(); }
+  // Prepare map
+
+
   event.preventDefault();
   var lon = document.getElementById('lon').value;
   var lat = document.getElementById('lat').value;
@@ -9,17 +18,20 @@ form.addEventListener('submit', event => {
   var check = document.getElementById('checkWeather').checked;
 
   var xhttp = new XMLHttpRequest();
+
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
       var jsonResp = JSON.parse(xhttp.response);
       var element = document.getElementById('table');
       if (check) {
-        element.innerHTML = '<tr><th>Όνομα</th><th>Περιγραφή</th><th>Συντεταγμένες (longitude,latitude)</th><th>Ποιότητα υδάτων</th><th>Απόσταση(km)</th><th>Μποφόρ</th></tr>';
+        element.innerHTML = '<tr><th>Όνομα</th><th>Συντεταγμένες (longitude,latitude)</th><th>Ποιότητα υδάτων</th><th>Απόσταση(km)</th><th>Μποφόρ</th></tr>';
       } else {
-        element.innerHTML = '<tr><th>Όνομα</th><th>Περιγραφή</th><th>Συντεταγμένες (longitude,latitude)</th><th>Ποιότητα υδάτων</th><th>Απόσταση(km)</th></tr>';
+        element.innerHTML = '<tr><th>Όνομα</th><th>Συντεταγμένες (longitude,latitude)</th><th>Ποιότητα υδάτων</th><th>Απόσταση(km)</th></tr>';
       }
 
       var i;
+      var markers = [];
+
       for (i = 0; i < jsonResp.length; i++) {
         var j = jsonResp[i];
         var weatherRow = '';
@@ -30,18 +42,24 @@ form.addEventListener('submit', event => {
         var string = `
         <tr>
             <td>${j['nameGr']}</td>
-            <td>${j['description']}</td>
             <td>${j['lon']}, ${j['lat']}</td>
             <td>${getCategoryDescription(j['category'])}</td>
-            <td>${j['distance']}</td>
+            <td>${j['distance'].toFixed(2)}</td>
             ${weatherRow}
         <tr>
         `;
         element.innerHTML += string;
+        var marker = [j['lat'], j['lon']];
+        markers.push(marker);
+        L.marker(marker).addTo(map)
+            .bindPopup(j['nameGr'])
+            .openPopup();
       }
+      map.setView([lat, lon], 20);
+      map.fitBounds(markers);
     }
   };
-var url=`http://192.168.1.204:8080/nearBeaches?lon=${lon}&lat=${lat}&maxDistance=${maxDistance}`;
+  var url=`http://192.168.1.204:8080/nearBeaches?lon=${lon}&lat=${lat}&maxDistance=${maxDistance}`;
   xhttp.open("GET", url);
   xhttp.send();
 });
@@ -96,7 +114,7 @@ function setWeather (lon, lat, i) {
       var windSpeed = weatherResp['wind']['speed'];
 
       var beaufort = msToBeaufort(windSpeed);
-      document.getElementById('weather'+i).innerHTML = beaufort + " , " + windSpeed;
+      document.getElementById('weather'+i).innerHTML = beaufort;
     }
   }
   weatherReq.open("GET", weatherUrl);
