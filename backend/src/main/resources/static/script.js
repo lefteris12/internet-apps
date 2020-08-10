@@ -59,7 +59,7 @@ form.addEventListener('submit', event => {
       map.fitBounds(markers);
     }
   };
-  var url=`http://192.168.1.204:8080/nearBeaches?lon=${lon}&lat=${lat}&maxDistance=${maxDistance}`;
+  var url=`http://localhost:8080/nearBeaches?lon=${lon}&lat=${lat}&maxDistance=${maxDistance}`;
   xhttp.open("GET", url);
   xhttp.send();
 });
