@@ -1,4 +1,4 @@
-./mvnw spring-boot:run# 🏖️ Greek Beaches 
+# 🏖️ Greek Beaches 
 
 ## Περιγραφή
 
