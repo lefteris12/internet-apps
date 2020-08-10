@@ -14,8 +14,58 @@
 ## Υλοποίηση
 
 - Βάση Δεδόμενων: PostgreSQL
-- Backend: API endpoints μέσω Java (με κάποιο framework π.χ. Spring)
-- Frontend: HTML/CSS/JavaScript στο οποίο θα δίνεται η τοποθεσία από τον χρήστη και θα εμφανίζονται παραλίες κοντά του
+- Backend: API endpoints μέσω Java (με το framework Spring)
+- Frontend: HTML/CSS/JavaScript στο οποίο δίνεται η τοποθεσία από τον χρήστη και εμφανίζονται παραλίες κοντά του. Εμφανίζονται πληροφορίες όπως την ποιότητα των υδάτων σύμφωνα με τις μετρήσεις, τα μποφόρ στην παραλία (που δείχνουν αν ο καιρός είναι κατάλληλος για κολύμβηση) και η τοποθεσία στο χάρτη των παραλιών.
+
+## Εγκατάσταση σε Ubuntu
+
+### Εγκατάσταση PostgreSQL
+
+```
+sudo apt update
+sudo apt install postgresql postgresql-contrib
+```
+Η βάση δεδομένων έχει όνομα `internet-apps`.
+Για την πρόσβαση χρησιμοποιείται ο προεπιλεγμένος χρήστης `postgres` με κωδικό `postgres`.
+Για να οριστεί αυτός ο κωδικός για το χρήστη `postgres` και να δημιουργηθεί η βάση:
+
+```
+sudo -u postgres psql
+ALTER USER postgres PASSWORD 'postgres';
+CREATE DATABASE "internet-apps";
+```
+
+### Εγκατάσταση πακέτων Python
+
+Για τη λειτουργία του script `import-excel.py` που εισάγει τα δεδομένα στη βάση πρέπει να εγκατασταθούν κάποια Python πακέτα:
+
+```
+sudo apt install python3-pip
+pip3 install psycopg2-binary xlrd pandas
+```
+
+Στη συνέχεια μπορεί να εκτελεστεί το script για να αρχικοποιηθεί η βάση:
+
+```
+python3 import-excel.py
+```
+
+### Εκκίνηση του server
+
+Εγκατάσταση Java:
+
+```
+sudo apt update
+sudo apt install default-jdk
+
+```
+Εκκίνηση server:
+```
+cd backend
+./mvnw spring-boot:run
+```
+
+Το web app είναι διαθέσιμο στο http://localhost:8080
 
 ## Author
 Λευτέρης Καπελώνης
