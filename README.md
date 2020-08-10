@@ -41,7 +41,7 @@ CREATE DATABASE "internet-apps";
 
 ```
 sudo apt install python3-pip
-pip3 install psycopg2 xlrd pandas
+pip3 install psycopg2-binary xlrd pandas
 ```
 
 Στη συνέχεια μπορεί να εκτελεστεί το script για να αρχικοποιηθεί η βάση:
