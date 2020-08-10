@@ -40,6 +40,7 @@ CREATE DATABASE "internet-apps";
 Για τη λειτουργία του script `import-excel.py` που εισάγει τα δεδομένα στη βάση πρέπει να εγκατασταθούν κάποια Python πακέτα:
 
 ```
+sudo apt install python3-pip
 pip3 install psycopg2 xlrd pandas
 ```
 
