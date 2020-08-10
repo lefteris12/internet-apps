@@ -32,7 +32,7 @@ sudo apt install postgresql postgresql-contrib
 ```
 sudo -u postgres psql
 ALTER USER postgres PASSWORD 'postgres';
-CREATE DATABASE internet-apps;
+CREATE DATABASE "internet-apps";
 ```
 
 ### Εγκατάσταση πακέτων Python
