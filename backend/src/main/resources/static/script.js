@@ -7,10 +7,6 @@ var layer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 form.addEventListener('submit', event => {
-//  if (map != undefined) { map.remove(); }
-  // Prepare map
-
-
   event.preventDefault();
   var lon = document.getElementById('lon').value;
   var lat = document.getElementById('lat').value;
